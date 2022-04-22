@@ -5,7 +5,7 @@ CREATE TABLE users(
   last_name VARCHAR(100) NOT NULL,
   username VARCHAR(100) NOT NULL UNIQUE,
   phone VARCHAR(20) NOT NULL UNIQUE,
-  email VARCHAR(255),
+  email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   DOB DATE NOT NULL,
   gender varchar(15) NOT NULL,
