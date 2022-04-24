@@ -6,6 +6,9 @@ const authVerify = (req, res, next) => {
 
   try {
     const verified = jwt.verify(token, 'RawTexthohai');
+    console.log(verified);
+    console.log("logging gere: ", verified);
+    req.user = verified;
     
     next();
   } catch (error) {

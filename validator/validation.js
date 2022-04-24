@@ -24,9 +24,9 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
-const walletValidation = data => {
+const pinValidation = data => {
   const schema = Joi.object({
-    pin: Joi.string().max(5).required()
+    pin: Joi.string().min(5).max(5).required()
   });
 
   return schema.validate(data);
@@ -35,5 +35,5 @@ const walletValidation = data => {
 module.exports = {
   registerValidation,
   loginValidation,
-  walletValidation
+  pinValidation
 };

@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const req = require("express/lib/request");
 const jwt = require("jsonwebtoken");
 const dbConnect = require("../db/connect");
-const { insertUser } = require("../db/query");
+const { insertUser, insertUserSecret } = require("../db/query");
 const query = require("../db/query");
 const authVerify = require("../middlewares/verifyToken");
 const { registerValidation, loginValidation } = require("../validator/validation");
@@ -33,7 +33,8 @@ const registerUser = async (req,res) => {
 
   try {
     const register = await pool.query(insertUser,[...values, hashedPassword]);
-    return res.json({"Message":"Registration Successful!"});
+    const createWallet = await pool.query(insertUserSecret, [register.rows[0].id]);
+    return res.json({"Message":register});
   } catch (error) {
     console.log(error);
     return res.json({"Message": error});
@@ -65,7 +66,7 @@ const loginUser = async (req, res) => {
   const user = await pool.query(query.getUser, [req.body.email, hashedPassword]);
 
   // Create and Assign a Token
-  const token = jwt.sign({"_id": user.rows[0].id, "_username": user.rows[0].id}, 'RawTexthohai');
+  const token = jwt.sign({"_id": user.rows[0].id, "_username": user.rows[0].username}, 'RawTexthohai');
   res.header('auth-token',token);
   return res.send('Logged In!');
 };
