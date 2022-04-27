@@ -10,8 +10,13 @@ const query = {
   "setUserPin": `UPDATE user_secret SET pin = $1 WHERE user_id = $2`,
   "getUserSecret": `SELECT * FROM users JOIN user_secret ON users.id = user_secret.user_id WHERE id = $1`,
   "reduceBalanceQuery": `UPDATE user_secret SET balance = $1 WHERE user_id = $2`,
-  "updateReceiverBalanceQuery": `UPDATE user_secret SET balance = $1 FROM users WHERE phone = $2`
+  "userByPhoneQuery": `SELECT * FROM users WHERE phone = $1`,
+  "updateReceiverBalanceQuery": `UPDATE user_secret SET balance = $1 WHERE user_id = $2`,
+  "transactionQuery":`INSERT INTO user_transaction (trans_id, sender_phone, receiver_phone, amount) VALUES ($1,$2, $3,$4)`,
 };
+
+// 
+// 
 
 
 module.exports = query;

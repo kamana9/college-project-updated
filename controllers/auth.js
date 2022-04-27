@@ -37,7 +37,7 @@ const registerUser = async (req,res) => {
     return res.json({"Message":register});
   } catch (error) {
     console.log(error);
-    return res.json({"Message": error});
+  return res.json({"Message": error});
   }
 
 };
@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
   // Check if email exist
   const emailExist = await pool.query(query.emailExist, [req.body.email]);
   if (emailExist.rowCount===0){
-    return res.json({"message":"Seems like user doesn't exist"});
+    return res.json({"message":"Seems like user doesn't exist!"});
   };
 
   // compare password with hash

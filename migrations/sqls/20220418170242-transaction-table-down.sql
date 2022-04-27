@@ -1,3 +1,3 @@
 /* Replace with your SQL commands */
 
-DROP TABLE "user_transaction" cascade;
+DROP TABLE "user_transaction";

@@ -32,8 +32,19 @@ const pinValidation = data => {
   return schema.validate(data);
 };
 
+const transValidation = data => {
+  const schema = Joi.object({
+    pin: Joi.string().min(5).max(5).required(),
+    receiver_phone: Joi.string().min(10).max(10).required(),
+    amount: Joi.number().greater(0).required()
+  });
+
+  return schema.validate(data);
+};
+
 module.exports = {
   registerValidation,
   loginValidation,
-  pinValidation
+  pinValidation,
+  transValidation
 };
