@@ -17,3 +17,4 @@ app.use('/api/v1/wallet/', walletRouter);
   const pool = await dbConnect();
   app.listen(3000, () => console.log('Server Running'));
 })();
+

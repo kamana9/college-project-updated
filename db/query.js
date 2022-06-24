@@ -13,10 +13,11 @@ const query = {
   "userByPhoneQuery": `SELECT * FROM users WHERE phone = $1`,
   "updateReceiverBalanceQuery": `UPDATE user_secret SET balance = $1 WHERE user_id = $2`,
   "transactionQuery":`INSERT INTO user_transaction (trans_id, sender_phone, receiver_phone, amount) VALUES ($1,$2, $3,$4)`,
+  "fetchFavNumber":`SELECT * FROM my_favourites WHERE user_id = $1;`,
+  "addFavNumber":`INSERT INTO my_favourites(user_id,phone) VALUES($1,$2)`,
+  "deleteFavNumber": `DELETE from my_favourites where id=$1;`,
+  "updateFavNumber":`Update my_favourites set phone=$1 where id=$2;`
+  
 };
-
-// 
-// 
-
 
 module.exports = query;

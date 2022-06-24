@@ -9,6 +9,13 @@ const {
   updateReceiverBalanceQuery,
   userByPhoneQuery,
   transactionQuery,
+  fetchFavNumber,
+  addFavNumber,
+  updateFavNumber,
+  deleteFavNumber
+
+
+  
 } = require("../db/query");
 const authVerify = require("../middlewares/verifyToken");
 const { pinValidation, transValidation } = require("../validator/validation");
@@ -45,12 +52,13 @@ const sendMoney = async (req, res) => {
 
   // Send Money
   const { receiver_phone, amount, pin } = req.body;
+  console.log("User=>",req.user)
   try {
     var user = await pool.query(getUserByID, [req.user._id]);
   } catch (error) {
     console.log(error);
   }
-
+  console.log("user ===========>", user)
   const senderPhone = user.rows[0].phone;
 
   try {
@@ -121,9 +129,53 @@ const sendMoney = async (req, res) => {
     return res.send(error);
   }
 };
+const addFav = async (req,res)=>{
+  const pool= await dbConnect()
+  const {phone}=req.body;
+console.log( req.user)
+  try {
+    const add = await pool.query(addFavNumber,[req.user._id,phone]);
+    console.log(add);
+    return res.send(
+      `Addeed Successfully:${phone}`
+    );
+  } catch(err) {
+    console.log(err);
+    return res.send(err);
+  }
+
+};
+
+const favNum= async(req,res)=>{
+  const pool= await dbConnect()
+  console.log(req.user._id);
+  const fetch=await pool.query(fetchFavNumber,[req.user._id]);
+  return res.send(fetch.rows)
+
+}
+
+const updateFav = async(req,res)=>{
+  const pool=await dbConnect();
+  const {phone,id}=req.body;
+  await pool.query(updateFavNumber,[phone,id]);
+  res.status(200).send("updated");
+
+}
+
+const deleteFav = async (req, res) => {
+  const pool = await dbConnect();
+  const {id} = req.body;
+  await pool.query(deleteFavNumber, [id]);
+  res.status(200).send("delete!!");
+}
+
 
 module.exports = {
   walletinfo,
   setPin,
   sendMoney,
+  addFav,
+  favNum,
+  updateFav,
+  deleteFav
 };

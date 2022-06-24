@@ -41,7 +41,6 @@ const transValidation = data => {
 
   return schema.validate(data);
 };
-
 module.exports = {
   registerValidation,
   loginValidation,

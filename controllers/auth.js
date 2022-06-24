@@ -34,7 +34,7 @@ const registerUser = async (req,res) => {
   try {
     const register = await pool.query(insertUser,[...values, hashedPassword]);
     const createWallet = await pool.query(insertUserSecret, [register.rows[0].id]);
-    return res.json({"Message":register});
+    return res.send("Your account is successfully registered.");
   } catch (error) {
     console.log(error);
   return res.json({"Message": error});
