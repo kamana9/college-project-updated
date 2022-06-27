@@ -14,9 +14,7 @@ const Settings = () => {
         </Heading>
       </Link>
       <PageLayout>
-        <Flex w="100%" h="100vh">
-          {" "}
-        </Flex>
+        <Flex w="100%" h="100vh"></Flex>
       </PageLayout>
     </div>
   );

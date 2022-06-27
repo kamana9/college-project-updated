@@ -76,6 +76,28 @@ const Sidebar = () => {
           <Text ml="0.5rem">Settings</Text>
         </Flex>
       </NavLink>
+      <NavLink to="/login/setPin">
+        <Flex
+          _hover={{ bg: "#c4c4c460" }}
+          p="1rem"
+          w="100%"
+          alignItems="center"
+        >
+          <Image boxSize="1.5rem" src={setting} alt="menu" />
+          <Text ml="0.5rem">set_pin</Text>
+        </Flex>
+      </NavLink>
+      <NavLink to="/login/logout">
+        <Flex
+          _hover={{ bg: "#c4c4c460" }}
+          p="1rem"
+          w="100%"
+          alignItems="center"
+        >
+          <Image boxSize="1.5rem" src={home} alt="menu" />
+          <Text ml="0.5rem">logout</Text>
+        </Flex>
+      </NavLink>
     </Box>
   );
 };

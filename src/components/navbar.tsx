@@ -1,5 +1,7 @@
 import { Flex, Text, Input, Spacer, Heading } from "@chakra-ui/react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import authContext from "../context/context";
 
 const Navbar = () => {
   return (

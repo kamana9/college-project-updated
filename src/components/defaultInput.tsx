@@ -9,6 +9,9 @@ const DefaultInput = (props: any) => {
       borderColor="#E6E6E620"
       size="sm"
       bg="#E6E6E620"
+      type={props.type || "text"}
+      value={props.value}
+      onChange={props.onChange}
       borderRadius="0.15rem"
     />
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Flex,
   Spacer,
@@ -30,8 +30,23 @@ import DefaultButton from "../../components/defaultButton";
 import Testemonials from "./../../components/testemonials";
 import Footer from "./../../components/footer";
 import Navbar from "../../components/navbar";
+import authContext from "../../context/context";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const { user } = useContext(authContext);
+  const { state }: any = useLocation();
+  let navigate = useNavigate();
+
+  if (user) {
+    const path = state?.path || "/login/dashboard";
+    return <Navigate to={path} />;
+  }
+
+  const redirectToLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <div>
       <Navbar />
@@ -53,7 +68,12 @@ const Home = () => {
           </Heading>
           <Text>Trusted Payment Service of Nepal.</Text>
           <Flex py="2rem" w="500px">
-            <Button px="5rem" bg="#A1FE6B" color="black">
+            <Button
+              px="5rem"
+              bg="#A1FE6B"
+              color="black"
+              onClick={redirectToLogin}
+            >
               Send Your Money
             </Button>
           </Flex>

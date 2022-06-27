@@ -1,7 +1,9 @@
 import { Stack, Text, Button, Center } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const featuresCardLarge = (props: any) => {
+  let navigate = useNavigate();
   return (
     <Center>
       <Stack maxW="500px" w={props.width ? props.width : "100%"}>
@@ -21,7 +23,12 @@ const featuresCardLarge = (props: any) => {
           {props.discription}
         </Text>
         <Stack py="1.5rem">
-          <Button color="black" bg="#A1FE6B" w="240px">
+          <Button
+            color="black"
+            bg="#A1FE6B"
+            w="240px"
+            onClick={() => navigate("/login")}
+          >
             Get Started Now
           </Button>
         </Stack>

@@ -4,17 +4,32 @@ import "./index.css";
 import App from "./App";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
+import AuthContextProvider from "./context/AuthContextProvider";
+import { QueryClientProvider, QueryClient } from "react-query";
+import theme from "./theme";
+import axios from "axios";
+import { ReactQueryDevtools } from "react-query/devtools";
+import Cookies from "js-cookie";
+
+const queryClient = new QueryClient();
 
 //Font
-import theme from "./theme";
+
+axios.defaults.baseURL = "http://localhost:8000/api/v1";
+// axios.defaults.headers.common["auth-token"] = Cookies.get("token") || "";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <AuthContextProvider>
+        <ChakraProvider theme={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ChakraProvider>
+      </AuthContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

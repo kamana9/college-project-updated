@@ -12,8 +12,16 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const Dashboard = () => {
+  const walletInfo = useQuery("wallet-info", () =>
+    axios.get("/wallet/dashboard")
+  );
+
+  const data = walletInfo.data?.data.rows;
+
   return (
     <div>
       <Flex
@@ -33,21 +41,17 @@ const Dashboard = () => {
         </Link>
         <Spacer />
         <Spacer />
-        <Link to="/">
-          <Heading color="white">
-            <Box textAlign="right" pt="1rem">
-              <Button px="1rem" bg="#A1FE6B" color="black">
-                logout
-              </Button>
-            </Box>
-          </Heading>
-        </Link>
       </Flex>
       <PageLayout>
         <Flex w="100%" h="100vh">
           <Flex w="100%" boxSizing="border-box">
             <Flex w="inherit" m="2rem" direction="column">
-              <YourAccount balance={56262} accountNo={"25654965667469"} />
+              <YourAccount
+                firstName={data ? data[0].first_name : "Your"}
+                lastName={data ? data[0].last_name : "Account"}
+                balance={data ? data[0]?.balance : 0}
+                accountNo={"25654965667469"}
+              />
             </Flex>
           </Flex>
         </Flex>

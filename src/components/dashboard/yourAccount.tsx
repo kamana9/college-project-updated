@@ -1,14 +1,19 @@
 import React from "react";
 import { Flex, Text, Spacer } from "@chakra-ui/react";
+
 interface propsType {
   balance: number;
   accountNo: string;
+  firstName: string;
+  lastName: string;
 }
 const YourAccount = (props: propsType) => {
   return (
     <Flex p="1rem 2rem" bg="#191A1A" direction="column" w="400px" h="240px">
       <Flex>
-        <Text fontSize="sm">Your Account</Text>
+        <Text fontSize="sm">
+          {props.firstName} {props.lastName}
+        </Text>
         <Spacer />
         <Text p="0.2rem 0.5rem" bg="#FFFFFF06" fontSize="sm">
           FINAL
