@@ -4,5 +4,5 @@ CREATE TABLE "user_secret"(
   pin VARCHAR(255),
   user_id INT,
     CONSTRAINT fk_user FOREIGN KEY(user_id)
-      REFERENCES "users"(id)
+      REFERENCES "users"(id) on delete CASCADE
 );

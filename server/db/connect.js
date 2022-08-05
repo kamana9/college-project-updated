@@ -8,7 +8,7 @@ const credentials = {
   port: 5432,
 };
 
-async function dbConnect() {
+function dbConnect() {
   const pool = new Pool(credentials);
   return pool;
 }

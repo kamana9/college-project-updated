@@ -14,18 +14,20 @@ const {
   updateFavNumber,
   deleteFavNumber,
   getUserWithBalance,
+  deleteUsers
+  
 } = require("../db/query");
 const authVerify = require("../middlewares/verifyToken");
 const { pinValidation, transValidation } = require("../validator/validation");
 const { v1: uuidv1 } = require("uuid");
 const { loginUser } = require("./auth");
 
+const pool =  dbConnect();
 const walletinfo = async (req, res) => {
   res.json(req.user);
 };
 
 const setPin = async (req, res) => {
-  const pool = await dbConnect();
 
   // validate data
   const { error } = pinValidation(req.body);
@@ -42,7 +44,7 @@ const setPin = async (req, res) => {
 };
 
 const sendMoney = async (req, res) => {
-  const pool = await dbConnect();
+  
 
   // validate data
   const { error } = transValidation(req.body);
@@ -132,7 +134,7 @@ const sendMoney = async (req, res) => {
   }
 };
 const addFav = async (req, res) => {
-  const pool = await dbConnect();
+
   const { phone } = req.body;
   console.log(req.user);
   try {
@@ -146,14 +148,14 @@ const addFav = async (req, res) => {
 };
 
 const favNum = async (req, res) => {
-  const pool = await dbConnect();
+
   console.log(req.user._id);
   const fetch = await pool.query(fetchFavNumber, [req.user._id]);
   return res.send(fetch.rows);
 };
 
 const updateFav = async (req, res) => {
-  const pool = await dbConnect();
+  
   const { phone, id } = req.body;
   await pool.query(updateFavNumber, [phone, id]);
   res.status(200).send("updated");
@@ -169,11 +171,16 @@ const deleteFav = async (req, res) => {
 
 const getbalance = async (req, res) => {
   console.log("getData");
-  const pool = await dbConnect();
+  
   const { _id } = req.user;
   const data = await pool.query(getUserWithBalance, [_id]);
   console.log(data);
   return res.json(data);
+};
+const deleteuser= async (req, res) => {
+  const { id } = req.body;
+  await pool.query(deleteUsers, [id]);
+  res.status(200).send("User deleted!!");
 };
 
 module.exports = {
@@ -185,4 +192,5 @@ module.exports = {
   updateFav,
   deleteFav,
   getbalance,
+  deleteuser
 };

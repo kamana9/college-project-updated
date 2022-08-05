@@ -20,6 +20,12 @@ const query = {
   getUserWithBalance: `Select temp.first_name,temp.last_name,temp.balance from 
    (Select * from user_secret left join users on user_secret.user_id=users.id) as temp where
     temp.user_id=$1`,
+  adminemailExist: `SELECT * FROM admin WHERE email = $1`,
+  gettransactions:`Select user_transaction.*, users.username from user_transaction left join 
+  users on user_transaction.sender_phone=users.phone;`,
+  getallusers:`SELECT * from users`,
+  getoneusers:`SELECT * from users WHERE id= $1`,
+  deleteUsers:`DELETE from users where id=$1`
 };
 
 module.exports = query;
