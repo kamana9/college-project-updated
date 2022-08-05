@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const dbConnect = require("../db/connect");
 const {
   setUserPin,
@@ -14,7 +15,7 @@ const {
   updateFavNumber,
   deleteFavNumber,
   getUserWithBalance,
-  deleteUsers
+  deleteUsers,
   
 } = require("../db/query");
 const authVerify = require("../middlewares/verifyToken");
@@ -33,14 +34,22 @@ const setPin = async (req, res) => {
   const { error } = pinValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const { pin } = req.body;
+  const { pin,password } = req.body;
 
+  // Check if password is correct
+  var user = (await pool.query(getUserByID, [req.user._id]))?.rows[0];
+
+  const validPass = await bcrypt.compare(password, user.password);
+  if (!validPass) return res.status(400).send("Wrong Password...");
+  
   try {
     var setQuery = await pool.query(setUserPin, [pin, req.user._id]);
     return res.send("Pin is set.");
   } catch (error) {
     return res.send(error);
   }
+
+
 };
 
 const sendMoney = async (req, res) => {
@@ -66,6 +75,7 @@ const sendMoney = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+
 
   // Check if pin is correct
   console.log(userSecret.rows[0].pin);
