@@ -70,7 +70,11 @@ const Pinn = () => {
                   type="password"
                   onChange={(e: any) => setPin(e.target.value)}
                 />
-
+                <Text fontSize="xs">Password</Text>
+                <DefaultInput
+                  placeholder=""
+                  type="password"
+                  />
                 <Box textAlign="center" pt="1rem">
                   <DefaultButton type="submit">Set</DefaultButton>
                 </Box>
