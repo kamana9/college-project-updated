@@ -46,11 +46,11 @@ const Pinn = () => {
 
   return (
     <div>
-      <Heading color="white">
+      {/* <Heading color="white">
         <Heading as="span" display="inline" color="#A1FE6B">
           Kredit
         </Heading>
-      </Heading>
+      </Heading> */}
 
       <PageLayout>
         <Flex w="100%" h="100vh">

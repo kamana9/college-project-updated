@@ -17,15 +17,15 @@ import { Link } from "react-router-dom";
 const Transaction = () => {
   return (
     <div>
-      <Link to="/">
+      {/* <Link to="/">
         <Heading color="white">
           <Heading as="span" display="inline" color="#A1FE6B">
             Kredit
           </Heading>
         </Heading>
-      </Link>
+      </Link>*/}
       <PageLayout>
-        {" "}
+        {" "} 
         <Flex w="100%" h="100vh">
           <Tabs m="2rem">
             <TabList borderColor="blackAlpha.100">
@@ -74,7 +74,7 @@ const Transaction = () => {
             </TabPanels>
           </Tabs>
         </Flex>
-      </PageLayout>
+      </PageLayout> 
     </div>
   );
 };

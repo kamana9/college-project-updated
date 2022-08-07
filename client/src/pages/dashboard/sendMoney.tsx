@@ -69,13 +69,13 @@ const SendMoney = () => {
 
   return (
     <div>
-      <Link to="/">
+      {/* <Link to="/">
         <Heading color="white">
           <Heading as="span" display="inline" color="#A1FE6B">
             Kredit
           </Heading>
         </Heading>
-      </Link>
+      </Link> */}
       <PageLayout>
         <Flex w="100%" h="100vh">
           <HStack alignItems="flex-start" m="2rem" textAlign="left" gap="4rem">

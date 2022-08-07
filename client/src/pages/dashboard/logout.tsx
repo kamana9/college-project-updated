@@ -9,7 +9,7 @@ import {
   VStack,
   HStack,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useContext } from "react";
 import authContext from "../../context/context";
@@ -26,20 +26,23 @@ const Logg = () => {
 
   return (
     <div>
-      <Heading color="white">
+      {/* <Heading color="white">
         <Heading as="span" display="inline" color="#A1FE6B">
           Kredit
         </Heading>
-      </Heading>{" "}
-      <Flex
+      </Heading>{" "} */}
+      {/* <Flex
         alignItems="center"
         color="gray.50"
         bg="#1B1B1B"
         py="0.5rem"
         px="1rem"
         w="100%"
-      >
-        <PageLayout>
+      > */}
+         <PageLayout> 
+        <Flex w="100%" h="100vh">
+        <Flex w="100%" boxSizing="border-box">
+          <Flex w="inherit" m="2rem" direction="column">
           <HStack m="2rem" alignItems="flex-start" textAlign="left" gap="4rem">
             <VStack alignItems="left" width="300px">
               <Text fontSize="lg" fontWeight="bold">
@@ -62,8 +65,11 @@ const Logg = () => {
               </Link>
             </VStack>
           </HStack>
-        </PageLayout>
+          </Flex>
+        </Flex>
       </Flex>
+      {/* </Flex> */}
+      </PageLayout>
     </div>
   );
 };

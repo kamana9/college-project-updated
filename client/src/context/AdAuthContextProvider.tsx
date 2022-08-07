@@ -2,7 +2,7 @@ import React from 'react';
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { useReducer } from "react";
-import authContext from "./context";
+import {adContext} from "./context";
 
 const data = () => {
   const token = Cookies.get("token");
@@ -11,7 +11,6 @@ const data = () => {
 };
 
 const initialValue = {
-  user: data(),
   admin : data()
 };
 
@@ -20,19 +19,19 @@ const reducer = (state: any, action: any) => {
     case "Logged In":
       return {
         ...state,
-        user: action.payload,
+        admin: action.payload,
       };
     case "Logged Out":
       return {
         ...state,
-        user: action.payload,
+        admin: action.payload,
       };
     default:
       return state;
   }
 };
 
-const AuthContextProvider = ({ children }) => {
+const AdAuthContextProvider = ({ children }) => {
   const [loggedState, dispatch] = useReducer(reducer, initialValue);
 
   const loginHandler = (data: any) => {
@@ -49,7 +48,7 @@ const AuthContextProvider = ({ children }) => {
     logout: logoutHandler,
   };
 
-  return <authContext.Provider value={value}>{children}</authContext.Provider>;
+  return <adContext.Provider value={value}>{children}</adContext.Provider>;
 };
 
-export default AuthContextProvider;
+export default AdAuthContextProvider;

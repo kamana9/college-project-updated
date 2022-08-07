@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Text, Image, Flex } from "@chakra-ui/react";
+import { Box, Text, Image, Heading, Flex } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import Dashboard from "./../pages/dashboard/dashboard";
 
@@ -15,6 +15,21 @@ import "./sidebar.css";
 const Sidebar = () => {
   return (
     <Box py="1rem" color="white" bg="#212222" minH="90vh" minW="240px">
+      <Flex
+        alignItems="center"
+        color="gray.50"
+        bg="#1B1B1B"
+        py="0.5rem"
+        px="1rem"
+        w="100%"
+      >
+        <Heading color="white">
+          <Heading as="span" display="inline" color="#A1FE6B">
+            Kredit
+          </Heading>
+        </Heading>
+      </Flex>
+      
       <NavLink
         to="/login/dashboard
       "

@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Flex
+      {/* <Flex
         alignItems="center"
         color="gray.50"
         bg="#1B1B1B"
@@ -41,7 +41,7 @@ const Dashboard = () => {
         </Link>
         <Spacer />
         <Spacer />
-      </Flex>
+      </Flex> */}
       <PageLayout>
         <Flex w="100%" h="100vh">
           <Flex w="100%" boxSizing="border-box">

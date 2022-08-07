@@ -10,6 +10,7 @@ import theme from "./theme";
 import axios from "axios";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Cookies from "js-cookie";
+import AdAuthContextProvider from "./context/AdAuthContextProvider";
 
 const queryClient = new QueryClient();
 
@@ -23,11 +24,13 @@ ReactDOM.render(
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <AuthContextProvider>
-        <ChakraProvider theme={theme}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ChakraProvider>
+        <AdAuthContextProvider>
+          <ChakraProvider theme={theme}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ChakraProvider>
+        </AdAuthContextProvider>
       </AuthContextProvider>
     </QueryClientProvider>
   </React.StrictMode>,

@@ -153,14 +153,14 @@ const Fav = () => {
 
   return (
     <div>
-      <Link to="/">
+      {/* <Link to="/">
         <Heading color="white">
           <Heading as="span" display="inline" color="#A1FE6B">
             Kredit
           </Heading>
         </Heading>
-      </Link>
-      <PageLayout>
+      </Link>*/}
+      <PageLayout> 
         <Flex w="100%" h="100vh">
           <form>
             <HStack
@@ -249,7 +249,7 @@ const Fav = () => {
             </VStack>
           </HStack>
         </Flex>
-      </PageLayout>
+     </PageLayout> 
     </div>
   );
 };

@@ -17,10 +17,19 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Pinn from "./pages/dashboard/pin";
 import Logg from "./pages/dashboard/logout";
+import Adlog from "./pages/ad_dashboard/ad_login";
+import Adashboard from "./pages/ad_dashboard/ad_dashboard";
+import Adclog from "./pages/ad_dashboard/ad_create";
+import Adlogg from "./pages/ad_dashboard/ad_logout";
+import { adContext } from "./context/context";
+import PageLayout from "./container/pageLayout/pageLayout";
 
 const app = () => {
   const { user } = useContext(authContext);
   const token = Cookies.get("token");
+  
+  const { admin } = useContext(adContext);
+  // const token = Cookies.get("token");
 
   useLayoutEffect(() => {
     axios.defaults.headers.common["auth-token"] = token;
@@ -30,14 +39,32 @@ const app = () => {
     <>
       <Flex direction="column" color="white" bg="#0F1010" w="100%">
         <Routes>
+          
           <Route path="/" element={<Home />} />
+          <Route path="/ad_login/" element={<Adlog />} />
+        <Route path="/post" element={<Adashboard />} />
+        <Route path="/ad_login/ad_dashboard"
+         element={<Protected to={'/ad_login'} 
+         isLoggedIn={admin}>
+                <Adashboard />
+              </Protected>
+        } />
+        <Route path="/ad_login/ad_create" element={ 
+        <Protected to={'/ad_login'} isLoggedIn={admin}>
+                <Adclog />
+              </Protected>} />
+        <Route path="/ad_login/ad_logout" element={ 
+        <Protected to={'/ad_login'} isLoggedIn={admin}>
+       <Adlogg />
+      </Protected>} />
           <Route path="/post" element={<Dashboard />} />
           <Route path="/register/" element={<Registration />} />
           <Route path="/login/" element={<Log />} />
+          {/* <Route path="/user" element={<PageLayout />}></Route> */}
           <Route
             path="/login/dashboard"
             element={
-              <Protected isLoggedIn={user}>
+              <Protected to={'/login'} isLoggedIn={user}>
                 <Dashboard />
               </Protected>
             }
@@ -45,7 +72,7 @@ const app = () => {
           <Route
             path="/login/send-money"
             element={
-              <Protected isLoggedIn={user}>
+              <Protected to={'/login'} isLoggedIn={user}>
                 <SendMoney />
               </Protected>
             }
@@ -53,7 +80,7 @@ const app = () => {
           <Route
             path="/login/favourities"
             element={
-              <Protected isLoggedIn={user}>
+              <Protected to={'/login'} isLoggedIn={user}>
                 <Fav />
               </Protected>
             }
@@ -61,7 +88,7 @@ const app = () => {
           <Route
             path="/login/transaction"
             element={
-              <Protected isLoggedIn={user}>
+              <Protected to={'/login'} isLoggedIn={user}>
                 <Transaction />
               </Protected>
             }
@@ -69,7 +96,7 @@ const app = () => {
           <Route
             path="/login/settings"
             element={
-              <Protected isLoggedIn={user}>
+              <Protected to={'/login'} isLoggedIn={user}>
                 <Settings />
               </Protected>
             }
@@ -77,7 +104,7 @@ const app = () => {
           <Route
             path="/login/setPin"
             element={
-              <Protected isLoggedIn={user}>
+              <Protected to={'/login'} isLoggedIn={user}>
                 <Pinn />
               </Protected>
             }
@@ -85,7 +112,7 @@ const app = () => {
           <Route
             path="/login/logout"
             element={
-              <Protected isLoggedIn={user}>
+              <Protected to={'/login'} isLoggedIn={user}>
                 <Logg />
               </Protected>
             }

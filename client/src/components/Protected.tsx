@@ -1,12 +1,12 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-function Protected({ isLoggedIn, children }) {
+function Protected({ isLoggedIn, children,to }) {
   const location = useLocation();
   if (!isLoggedIn) {
     return (
       <Navigate
-        to="/login"
+        to={to}
         replace={true}
         state={{ path: location.pathname }}
       />
@@ -15,4 +15,6 @@ function Protected({ isLoggedIn, children }) {
   return children;
 }
 
+
 export default Protected;
+
