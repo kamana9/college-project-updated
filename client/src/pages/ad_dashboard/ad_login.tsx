@@ -33,6 +33,7 @@ const Adlog = () => {
       if (response.status === 200 || response.status === 201) {
         // setEmail("");
         // setPassword("");
+      
         if (response.data?.token) {
           cogoToast.success("Logged In");
           const decoded = jwt_decode(response.data.token);

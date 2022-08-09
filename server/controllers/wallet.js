@@ -16,45 +16,39 @@ const {
   deleteFavNumber,
   getUserWithBalance,
   deleteUsers,
-  
 } = require("../db/query");
 const authVerify = require("../middlewares/verifyToken");
 const { pinValidation, transValidation } = require("../validator/validation");
 const { v1: uuidv1 } = require("uuid");
 const { loginUser } = require("./auth");
 
-const pool =  dbConnect();
+const pool = dbConnect();
 const walletinfo = async (req, res) => {
   res.json(req.user);
 };
 
 const setPin = async (req, res) => {
-
   // validate data
   const { error } = pinValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const { pin,password } = req.body;
+  const { pin, password } = req.body;
 
   // Check if password is correct
   var user = (await pool.query(getUserByID, [req.user._id]))?.rows[0];
 
   const validPass = await bcrypt.compare(password, user.password);
   if (!validPass) return res.status(400).send("Wrong Password...");
-  
+
   try {
     var setQuery = await pool.query(setUserPin, [pin, req.user._id]);
     return res.send("Pin is set.");
   } catch (error) {
     return res.send(error);
   }
-
-
 };
 
 const sendMoney = async (req, res) => {
-  
-
   // validate data
   const { error } = transValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -75,7 +69,6 @@ const sendMoney = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
 
   // Check if pin is correct
   console.log(userSecret.rows[0].pin);
@@ -144,7 +137,6 @@ const sendMoney = async (req, res) => {
   }
 };
 const addFav = async (req, res) => {
-
   const { phone } = req.body;
   console.log(req.user);
   try {
@@ -158,14 +150,12 @@ const addFav = async (req, res) => {
 };
 
 const favNum = async (req, res) => {
-
   console.log(req.user._id);
   const fetch = await pool.query(fetchFavNumber, [req.user._id]);
   return res.send(fetch.rows);
 };
 
 const updateFav = async (req, res) => {
-  
   const { phone, id } = req.body;
   await pool.query(updateFavNumber, [phone, id]);
   res.status(200).send("updated");
@@ -181,14 +171,14 @@ const deleteFav = async (req, res) => {
 
 const getbalance = async (req, res) => {
   console.log("getData");
-  
+
   const { _id } = req.user;
   const data = await pool.query(getUserWithBalance, [_id]);
   console.log(data);
   return res.json(data);
 };
-const deleteuser= async (req, res) => {
-  const { id } = req.body;
+const deleteuser = async (req, res) => {
+  const { id } = req.params;
   await pool.query(deleteUsers, [id]);
   res.status(200).send("User deleted!!");
 };
@@ -202,5 +192,5 @@ module.exports = {
   updateFav,
   deleteFav,
   getbalance,
-  deleteuser
+  deleteuser,
 };

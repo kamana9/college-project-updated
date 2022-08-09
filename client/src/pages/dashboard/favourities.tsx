@@ -25,7 +25,6 @@ import { useQueryClient } from "react-query";
 import cogoToast from "cogo-toast";
 
 const Fav = () => {
-  const [name, setName] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
   const [id, setId] = useState(null);
@@ -86,7 +85,7 @@ const Fav = () => {
     e.preventDefault();
     const checkPhoneNo = validatePhoneNo(phoneNo);
 
-    if (!name || !phoneNo) {
+    if (!phoneNo) {
       return cogoToast.error("Cannot be Empty");
     }
     if (!Number(phoneNo)) {
@@ -95,11 +94,10 @@ const Fav = () => {
     if (!checkPhoneNo) {
       return cogoToast.error("Invalid Phone Number");
     }
-    const data = { name, phone: phoneNo };
+    const data = {name:name ,phone: phoneNo };
 
     try {
       addFavMutations.mutate(data);
-      setName("");
       setPhoneNo("");
     } catch (error) {
       console.log(error);
@@ -118,7 +116,7 @@ const Fav = () => {
   const updateFormHandler = () => {
     const checkPhoneNo = validatePhoneNo(phoneNo);
 
-    if (!name || !phoneNo) {
+    if (!phoneNo) {
       return cogoToast.error("Cannot be Empty");
     }
     if (!Number(phoneNo)) {
@@ -134,7 +132,6 @@ const Fav = () => {
     try {
       updateFavMutations.mutate(data);
       setPhoneNo("");
-      setName("");
       setId(null);
       setIsUpdate(false);
     } catch (error) {
@@ -145,8 +142,7 @@ const Fav = () => {
   const updateFavHandler = (value: any) => {
     setIsUpdate(true);
     const data = favInfo.data?.data;
-    const { id, phone } = data.find((data: any) => data.id === value);
-    setName("Demo");
+    const { id, phone} = data.find((data: any) => data.id === value);
     setPhoneNo(phone);
     setId(id);
   };
@@ -174,14 +170,8 @@ const Fav = () => {
                   Add Favourites
                 </Text>
                 <Text pb="1rem" fontSize="md">
-                  enter phone number and name{" "}
+                  Enter phone number{" "}
                 </Text>
-                <Text fontSize="xs">Name:</Text>
-                <DefaultInput
-                  placeholder=""
-                  value={name}
-                  onChange={(e: any) => setName(e.target.value)}
-                />
                 <Text fontSize="xs">Phone Number:</Text>
                 <DefaultInput
                   placeholder="Eg: 98*********"
@@ -211,7 +201,6 @@ const Fav = () => {
                 <Thead>
                   <Tr color="white">
                     <Th border="none">SN</Th>
-                    <Th border="none"> Name</Th>
                     <Th border="none">Phone Number</Th>
                     <Th border="none">operation </Th>
                   </Tr>
@@ -221,7 +210,6 @@ const Fav = () => {
                     ? favInfo.data.data.map((obj: any, index: number) => (
                         <Tr key={obj.id}>
                           <Td>{index + 1}</Td>
-                          <Td>name_1</Td>
                           <Td>{obj.phone}</Td>
                           <Td>
                             <Box textAlign="right" pt="1rem">

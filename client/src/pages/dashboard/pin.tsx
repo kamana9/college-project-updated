@@ -10,10 +10,12 @@ import cogoToast from "cogo-toast";
 
 const Pinn = () => {
   const [pin, setPin] = useState("");
+  const [password, setPassword] = useState("");
   const mutations = useMutation(
     (values: any) => axios.post("/wallet/setpin", values),
     {
       onSuccess: (data) => {
+        setPassword("");
         if (data.data) {
           cogoToast.success(data.data);
         }
@@ -24,7 +26,7 @@ const Pinn = () => {
     }
   );
 
-  const formSubmitHandler = (e: any) => {
+  const formSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!pin) {
@@ -36,7 +38,25 @@ const Pinn = () => {
     }
     try {
       const data = {
-        pin: pin,
+        pin,
+        password,
+      };
+      mutations.mutate(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const trsnPassword = (e: any) => {
+    setPassword("");
+    if (!password) {
+      return alert("please enter password");
+    }
+    if (password != password) {
+      return alert("password is wrong");
+    }
+    try {
+      const data = {
+        password: password,
       };
       mutations.mutate(data);
     } catch (err) {
@@ -46,12 +66,6 @@ const Pinn = () => {
 
   return (
     <div>
-      {/* <Heading color="white">
-        <Heading as="span" display="inline" color="#A1FE6B">
-          Kredit
-        </Heading>
-      </Heading> */}
-
       <PageLayout>
         <Flex w="100%" h="100vh">
           <HStack m="2rem" alignItems="flex-start" textAlign="left" gap="4rem">
@@ -68,15 +82,26 @@ const Pinn = () => {
                   placeholder=""
                   value={pin}
                   type="password"
-                  onChange={(e: any) => setPin(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setPin(e.target.value)
+                  }
                 />
                 <Text fontSize="xs">Password</Text>
                 <DefaultInput
                   placeholder=""
                   type="password"
-                  />
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setPassword(e.target.value)
+                  }
+                  value={password}
+                />
                 <Box textAlign="center" pt="1rem">
-                  <DefaultButton type="submit">Set</DefaultButton>
+                  <DefaultButton
+                    // onClick={() => setPin && setPin(pin)}
+                    type="submit"
+                  >
+                    Set
+                  </DefaultButton>
                 </Box>
               </form>
             </VStack>

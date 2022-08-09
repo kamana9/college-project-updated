@@ -103,10 +103,10 @@ const Log = () => {
               />
               <Text fontSize="xs"> Password</Text>
               <DefaultInput
-                placeholder=""
                 type="password"
-                value={password}
+                placeholder=""
                 onChange={(e: any) => setPassword(e.target.value)}
+                value={password}
               />
               <Box textAlign="left" pt="1rem">
                 <Button px="2rem" bg="#A1FE6B" color="black" type="submit">

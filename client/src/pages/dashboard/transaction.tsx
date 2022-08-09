@@ -9,72 +9,117 @@ import {
   Tbody,
   Td,
   Th,
+  Spacer,
+  Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { useQueryClient } from "react-query";
+import { isError, useQuery } from "react-query";
+import axios from "axios";
 
 import PageLayout from "./../../container/pageLayout/pageLayout";
 import { Link } from "react-router-dom";
+interface IUser {
+  id: number;
+  first_name: string;
+  last_name: string;
+  username: string;
+  phone: string;
+  email: string;
+  password: string;
+  dob: string;
+  gender: string;
+  createdat: string;
+  modifiedat: string;
+  userTransactions: ITransaction[];
+}
+interface ITransaction {
+  trans_id: string;
+  sender_phone: string;
+  receiver_phone: string;
+  amount: string;
+  trans_date: string;
+  username: string | null;
+}
 
 const Transaction = () => {
+  const [transactions, setTransactions] = useState<ITransaction[]>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
+  const getTransactionsFromUserPhone = (
+    userPhone: string,
+    transactions: ITransaction[]
+  ) => {
+    return transactions.filter(
+      (transaction: ITransaction) => transaction.sender_phone === userPhone
+    );
+  };
+  let { isLoading, isError } = useQuery(
+    "users",
+    async () => axios.get("http://localhost:8000/api/v1/wallet/users"),
+    {
+      onSuccess: (data) => {
+        if (data.status === 200 || data.status === 201) {
+          setUsers(data.data);
+        }
+      },
+    }
+  );
+  let { isLoading: isTransactionsLoading, isError: isTransactionsError } =
+    useQuery(
+      "transactions",
+      async () => axios.get("http://localhost:8000/api/v1/wallet/transaction"),
+      {
+        onSuccess: (data) => {
+          if (data.status === 200 || data.status === 201) {
+            setTransactions(data.data);
+          }
+        },
+      }
+    );
+
+  const queryClient = useQueryClient();
+  if (isLoading || isTransactionsLoading) return <h1>Loading...</h1>;
+  if (isError || isTransactionsError) return <h1>Something went wrong...</h1>;
   return (
     <div>
-      {/* <Link to="/">
-        <Heading color="white">
-          <Heading as="span" display="inline" color="#A1FE6B">
-            Kredit
-          </Heading>
-        </Heading>
-      </Link>*/}
-      <PageLayout>
-        {" "} 
-        <Flex w="100%" h="100vh">
-          <Tabs m="2rem">
-            <TabList borderColor="blackAlpha.100">
-              <Tab _selected={{ borderColor: "#A1FE6B" }}>All</Tab>
-              <Tab _selected={{ borderColor: "#A1FE6B" }}>Received</Tab>
-              <Tab _selected={{ borderColor: "#A1FE6B" }}>Send</Tab>
-              <Tab _selected={{ borderColor: "#A1FE6B" }}>Withdraw</Tab>
-            </TabList>
-
-            <TabPanels>
-              <TabPanel>
-                <Table size="md" variant="striped" colorScheme="whiteAlpha">
-                  <Thead>
-                    <Tr color="white">
-                      <Th border="none">ID</Th>
-                      <Th border="none">Transaction Detail</Th>
-                      <Th border="none">Amount</Th>
-                      <Th border="none">Transaction Date</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody fontSize="sm" color="#FAFAFA">
-                    <Tr>
-                      <Td>101</Td>
-                      <Td>Recharge</Td>
-                      <Td>Rs: 100</Td>
-                      <Td> 02:01PM - 2022/02/20</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>102</Td>
-                      <Td>Shopping </Td>
-                      <Td>Rs: 2500</Td>
-                      <Td> 11:40AM -2022/02/20</Td>
-                    </Tr>
-                  </Tbody>
-                </Table>
-              </TabPanel>
-              <TabPanel>
-                <p>two!</p>
-              </TabPanel>
-              <TabPanel>
-                <p>three!</p>
-              </TabPanel>
-              <TabPanel>
-                <p>three!</p>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </Flex>
-      </PageLayout> 
+      
+          <PageLayout>
+            {" "}
+            <Text fontSize="lg" fontWeight="bold">
+              Transaction detail
+            </Text>
+            <br />
+            <br />
+            <Flex w="100%" h="100vh">
+              
+              
+              {users.map((user) =>
+                getTransactionsFromUserPhone(user.phone, transactions).map(
+                  (transaction: ITransaction) => (
+                    <Text key={user.id}>
+                      <Spacer />
+                      <React.Fragment key={transaction.trans_id}>
+                        <Spacer />
+                        Receiver Phone : {transaction.receiver_phone}
+                        <Spacer />
+                        Sender Phone : {transaction.sender_phone}
+                        <Spacer />
+                        Amount : {transaction.amount}
+                        <Spacer />
+                        Transaction Date :{" "}
+                        {new Date(transaction.trans_date).toLocaleDateString()}
+                        <Spacer />
+                        <Spacer />
+                      </React.Fragment>
+                      <Spacer />
+                    </Text>
+                  )
+                )
+              )}
+              <Spacer />
+            </Flex>
+          </PageLayout>
+       
     </div>
   );
 };

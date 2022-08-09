@@ -90,6 +90,7 @@ const SendMoney = () => {
                 <Text fontSize="xs">Amount:</Text>
                 <DefaultInput
                   placeholder="Rs:5000"
+                  type="number"
                   value={amount}
                   onChange={(e: any) => {
                     setAmount(e.target.value);
@@ -97,7 +98,7 @@ const SendMoney = () => {
                 />
                 <Text fontSize="xs">Pin No:</Text>
                 <DefaultInput
-                  placeholder="Eg: 9**"
+                  placeholder="Eg: 9****"
                   type="password"
                   value={pin}
                   onChange={(e: any) => {

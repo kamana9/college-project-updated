@@ -15,23 +15,21 @@ const authVerify = (req, res, next) => {
     console.log(error);
   }
 };
-const adminVerify =(req,res,next)=>{
-  const token =req.header("auth-token");
+const adminVerify = (req, res, next) => {
+  const token = req.header("auth-token");
   try {
     const claim = jwt.decode(token);
-    if(claim?.role !== "admin") return res.send({message: "Unauthorized Access"});
+    if (claim?.role !== "admin")
+      return res.status(400).send({ message: "Unauthorized Access" });
     req.user = claim;
     return next();
-   
   } catch (error) {
     return res.send(error);
     console.log(error);
   }
-
-  
-}
+};
 
 module.exports = {
   authVerify,
-  adminVerify
-}
+  adminVerify,
+};
