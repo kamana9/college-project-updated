@@ -21,9 +21,8 @@ const Footer = () => {
           </Heading>
         </Heading>
         <Text color="gray.200">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum minima
-          officiis magni temporibus deleniti accusantium enim quis, voluptas
-          nesciunt cupiditate ipsam necessitatibus fugiat! Eveniet, quibusdam?
+        Fast, Secure and easy choice to trasnfer your funds with satisfactory
+          users and reviews.
         </Text>
       </Flex>
       <Spacer />
@@ -40,14 +39,14 @@ const Footer = () => {
             placeholder="Enter Your Email"
           />
           <Text mt="2rem">
-            <TriangleDownIcon mr="0.5rem" /> Baneshwor, Kathmandu, Nepal
+            <TriangleDownIcon mr="0.5rem" /> Kirtipur, Kathmandu, Nepal
           </Text>
           <Text mt="0.5rem">
             <PhoneIcon mr="0.5rem" />
             +977-910000000
           </Text>
           <Text mt="0.5rem">
-            <EmailIcon mr="0.5rem" /> test@mail.com
+            <EmailIcon mr="0.5rem" /> kreditofficial@gmail.com
           </Text>
         </Flex>
         <Flex direction="column">

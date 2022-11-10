@@ -64,6 +64,7 @@ const sendMoney = async (req, res) => {
   console.log("user ===========>", user);
   const senderPhone = user.rows[0].phone;
 
+
   try {
     var userSecret = await pool.query(getUserSecret, [req.user._id]);
   } catch (error) {
@@ -82,7 +83,7 @@ const sendMoney = async (req, res) => {
   }
 
   if (receiver.rowCount === 0) return res.send("Invalid Receiver...");
-
+  if (receiver_phone == senderPhone) return res.send("Its your own account....");
   // Check if sender has balance
   const userBalance = userSecret.rows[0].balance;
   console.log("Userbalance", userBalance);

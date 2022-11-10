@@ -17,9 +17,9 @@ app.use(express.json());
 //Routes
 app.use("/api/v1/auth/", authRoute);
 app.use("/api/v1/wallet/", walletRouter);
-app.use("/api/v1/admin/", adminRouter)
+app.use("/api/v1/admin/", adminRouter);
 
-;(async () => {
+(async () => {
   const pool = await dbConnect();
   app.listen(PORT, () => {
     return console.log(`Running on http://localhost:${PORT}`);

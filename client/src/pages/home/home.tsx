@@ -151,15 +151,16 @@ const Home = () => {
         <SimpleGrid minChildWidth="600px">
           <Testemonials
             imageLink="https://bit.ly/kent-c-dodds"
-            company="DDC Milk"
-            name="Ram Shyam Hari"
-            testemony="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus elementum, mi dictum mus neque, ultrices gravida. Id porttitor quisque proin posuere arcu vulputate et. Aliquam a, pulvinar dolor felis metus, malesuada risus, mauris consequat. Aliquam nisl dictum diam ac sed quis quisque."
+            company="walli funder "
+            name="  Hari prasad Adhikari"
+            testemony="You are never alone when you have kredit with you.I Enjoy a lot using this wallet. Its simple yet attractive
+            "
           />
           <Testemonials
             imageLink="https://bit.ly/kent-c-dodds"
-            company="ABC COMPANY"
-            name="Ramesh "
-            testemony="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus elementum, mi dictum mus neque, ultrices gravida. Id porttitor quisque proin posuere arcu vulputate et. Aliquam a, pulvinar dolor felis metus, malesuada risus, mauris consequat. Aliquam nisl dictum diam ac sed quis quisque."
+            company="merchant COMPANY"
+            name="Ram Kumar Sharma "
+            testemony="Set of money from physical to digital. Such Easy system and beautiful design."
           />
         </SimpleGrid>
       </Flex>
@@ -188,19 +189,19 @@ export default Home;
 const featureCard = (
   <FeaturesCard
     icon={<ArrowForwardIcon color="white" />}
-    title="Load Money"
-    discription="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, maxime!"
+    title="Virtual is the new normal."
+    discription="Its better to be cashless cause kredit is better choice."
   />
 );
 const featureCardTwo = (
   <FeaturesCardTwo
-    title="Lorem ipsum"
-    discription="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, maxime!"
+    title="Hassle-free transactions made possible."
+    discription="Dont have time for cash? well ,Kredit is here."
   />
 );
 const featuresCardLarge = (
   <FeaturesCardLarge
-    title="Lorem ipsum"
-    discription="        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum corporis officia, perspiciatis quia distinctio quidem pariatur autem iure iste a assumenda consequatur rem modi fugit?"
+    title=" Cash wallet on your computer"
+    discription="Load and send money with one click."
   />
 );

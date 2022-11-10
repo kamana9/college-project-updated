@@ -49,6 +49,10 @@ const SendMoney = () => {
     if (pin.length !== 5) {
       return cogoToast.info("Invalid Pin , Please Enter the Set Pin");
     }
+    if (amount <= "0") {
+      return cogoToast.info("Invalid amount , Please Enter positive value");
+    }
+    // amount >= 0
     if (!checkPhoneNumber) {
       return cogoToast.error("Invalid Phone Number");
     }

@@ -8,7 +8,7 @@ const featuresCardLarge = (props: any) => {
     <Center>
       <Stack maxW="500px" w={props.width ? props.width : "100%"}>
         <Text fontWeight="semibold" color="#A1FE6B">
-          - Lorem Ipsum
+          -Right Choice.
         </Text>
         <Text
           fontSize="sm"

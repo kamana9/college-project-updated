@@ -31,9 +31,9 @@ const Adlog = () => {
   const mutations = useMutation((data: any) => axios.post("/admin", data), {
     onSuccess: (response) => {
       if (response.status === 200 || response.status === 201) {
-        // setEmail("");
-        // setPassword("");
-      
+        //setEmail("");
+        setPassword("");
+
         if (response.data?.token) {
           cogoToast.success("Logged In");
           const decoded = jwt_decode(response.data.token);
